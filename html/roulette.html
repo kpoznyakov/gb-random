@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<script>
+    var arr = [];
+    var arrRed = [];
+    var rounds = 10;
+    var red = -1;
+    var zero = 0;
+    var black = 1;
+    var countRed = 0;
+    var maxRed = 0;
+    var maxRed2 = 0;
+
+    
+    for (i=0; i<rounds; i++) {
+        arr.push(Math.round((Math.random()*2)-1));  //генерация чисел -1, 0, 1 
+    }
+    alert(arr +" "+ arr.length )  
+
+    for (i=0; i<arr.length; i++) {
+        if (arr[i] == -1){
+            countRed++;
+            arrRed.push(countRed);
+            if ( maxRed2 <= countRed ) {            //держим счетчик максимума всегда с максимальным значением
+                maxRed2 = countRed
+            }
+        } else {
+            countRed = 0;
+        }
+    }
+    for (i=0; i<arrRed.length; i++) {               //поиск максимального значения в массиве
+        if ((arrRed[i+1]) > maxRed) {
+            maxRed = (arrRed[i+1]);
+        }
+    }
+    
+    alert ("Массив результатов: " + arrRed);
+    alert ("Максимальное количество раз подряд выпало красное (-1):  при выборе максимального значения из массива " + maxRed + ". При установке максимального значения переменной: " + maxRed2);
+    alert (maxRed2)
+</script>

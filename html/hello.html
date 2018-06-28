@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<script>
+	var target1 = 44
+	var target2 = 231
+	var allovedDeviation = 20
+	var maxAngle = 360
+	var miss = ("Промах")
+	var hit = 0
+	var limit = 0
+	var min1 = target1 - allovedDeviation
+	var max1 = target1 + allovedDeviation
+	var min2 = target2 - allovedDeviation
+	var max2 = target2 + allovedDeviation
+
+	var shot1 = parseInt(prompt ("Укажи угол выстрела по первой мишени: "));
+	var shot2 = parseInt(prompt ("Укажи угол выстрела по второй мишени: "));
+
+	if ( (shot1 > maxAngle) || (shot2 > maxAngle) ) {
+		limit = limit + 1;
+		alert ("Укажите угол в пределах: " + maxAngle + " градусов.");
+	}
+		
+	if (limit == 0) {
+		if ( ((shot1 <= max1) && (shot1 >= min1)) || ((shot1 <= max2) && (shot1 >= min2)) || ((shot2 <= max1) && (shot2 >= min1)) || ((shot2 <= max2) && (shot2 >= min2)) ) {
+			hit = hit + 1
+			alert ("Попадание в одну из целей! Как бы посчитать количество попаданий...");
+		} else {
+		alert(miss);
+		}
+	}
+</script>

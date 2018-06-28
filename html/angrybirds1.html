@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<script>
+	var target1 = (Math.random() * 361)
+	var target2 = (Math.random() * 361)
+	var hitTarget1 = false
+	var hitTarget2 = false
+	var allovedDeviation = 20
+	var maxAngle = 360
+	var miss = ("Промах. ")
+	var hit = 0
+	var limit = 0
+	var min1 = target1 - allovedDeviation
+	var max1 = target1 + allovedDeviation
+	var min2 = target2 - allovedDeviation
+	var max2 = target2 + allovedDeviation
+
+	var shot1 = parseInt(prompt ("Укажи угол выстрела по первой мишени: "));
+	var shot2 = parseInt(prompt ("Укажи угол выстрела по второй мишени: "));
+
+	if ( (shot1 > maxAngle) || (shot2 > maxAngle) ) {
+		limit = limit + 1;
+		alert ("Укажите угол в пределах: " + maxAngle + " градусов.");
+	}
+		
+	if (limit == 0) {
+		if ((shot1 <= max1)&&(shot1 >= min1)) {
+			hit++
+			hitTarget1 = true
+		}
+	}
+
+	if ( (limit == 0)&&(hitTarget1 == false) ){
+		if ((shot1 <= max2)&&(shot1 >= min2)){
+			hit++
+			hitTarget2 = true
+		}
+	}
+
+	if (limit == 0) {
+		if ((shot2 <= max1)&&(shot2 >= min1)) {
+			hit++
+			hitTarget1 = true
+		}
+	}
+
+	if ( (limit == 0)&&(hitTarget2 == false) ){
+		if ((shot2 <= max2)&&(shot2 >= min2)){
+			hit++
+			hitTarget2 = true
+		}
+	}
+
+	if ( (hit == 0)&&(limit == 0) ){
+		alert (miss + "Вы ни разу не попали, попробуй еще раз!    " + "Цель 1 находилась на: " + target1 + ". Цель 2 находилась на: " +  target2)
+	} else if ( (hit == 2)&&(hitTarget1 == true) && (hitTarget2 == true) ) {
+		alert ("Ура! Вы поразили все цели! " + "Цель 1 находилась на: " + target1 + ". Цель 2 находилась на: " +  target2);
+	} else {
+		alert ("Вы поразили только одну цель. Цель 1 находилась на: " + target1 + ". Цель 2 находилась на: " +  target2)
+	}
+</script>
