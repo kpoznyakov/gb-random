@@ -1,0 +1,121 @@
+<meta charset="utf-8">
+<script>
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min +1 )) + min;
+}
+function getRandomCard(){
+    var cards = ['2','3','4','5','6','7','8','9','10','Валет','Дама','Король','Туз'];
+    return cards[getRandomInt(0, cards.length - 1)];
+}
+function getRandom(n) { // функция для выбора шанса что дилер возьмет карту
+    return Math.floor(Math.random()*n)+1
+}
+function getStatus() {
+    return ("Дилер: "+ dealer.join(" ")+ " | Игрок: "+ player.join(" ")+ ".")
+}
+function getSum(arr) {
+    var sum = 0;
+    for (var i = 0; i<arr.length; i++) {
+        if (arr[i] != 'Туз') {  
+           if (arr[i] == 'Дама' || arr[i] == 'Король' || arr[i] == 'Валет') { 
+                sum = sum + 10;
+            } else {
+                sum = sum + parseInt(arr[i]);
+            }         
+        }       
+    }
+
+    for (var i = 0; i<arr.length; i++) {
+        if (arr[i] == 'Туз') {
+            if (sum > 10) {
+                sum = sum +1
+            } else {
+                sum = sum + 11
+            }
+        }
+    }
+    return sum;
+}
+function won() {
+    var who = "Ничья :| "
+    if ((getSum(dealer) > getSum(player)) && getSum(dealer) <= 21) {
+        who = "Дилер :( "
+    } else if ((getSum(dealer) < getSum(player)) && getSum(player) <= 21) {
+        who = "Игрок!"
+    } else if (getSum(player) > 21) {
+        who = "У игрока перебор. Выиграл Дилер :(" 
+    } else if (getSum(dealer) > 21) {
+        who = "У Дилера перебор. Выиграл Игрок!!!"
+    } else if ((getSum(dealer) > 21) && (getSum(player) > 21)) {
+        who = "У всех перебор. Не будьте такими жадными!"
+    }
+return who;
+}
+function askCardPlayer() {
+        do {
+            answer = prompt(getStatus() + " | Берем еще? 1 - да; другое - нет. ")
+            if ( answer == 1) {
+                    player.push(getRandomCard())
+            }
+            } while (answer == 1 && getSum(player)<21 && getSum(dealer)<21)
+} 
+function askCardDealer(){
+    if (getSum(dealer)<=7) {
+        dealer.push(getRandomCard())
+        alert ("Дилер взял карту. Шанс Highest")
+    }  
+    if (getSum(dealer)>7 && getSum(dealer)<=9) {
+        if (getRandom(100)>50 && getRandom(100)<=100) {
+            dealer.push(getRandomCard())
+            alert ("Дилер взял карту. Шанс High")
+        }
+    } 
+    if (getSum(dealer)>9 && getSum(dealer)<=11) {
+        if (getRandom(100)>25 && getRandom(100)<=50) {
+            dealer.push(getRandomCard())
+            alert ("Дилер взял карту. Шанс Medium")
+        }
+    }  
+    if (getSum(dealer)>11 && getSum(dealer)<=14) {
+        if (getRandom(100)>15 && getRandom(100)<=25) {
+            dealer.push(getRandomCard())
+            alert ("Дилер взял карту. Шанс Low")
+        }
+    }  
+    if (getSum(dealer)>14 && getSum(dealer)<=16) {
+        if (getRandom(100)>7 && getRandom(100)<=15) {
+            dealer.push(getRandomCard())
+            alert ("Дилер взял карту. Шанс Lowest")
+        }
+    }  
+    if (getSum(dealer)>16 && getSum(dealer)<=20) {
+        if (getRandom(100)>0 && getRandom(100)<=7) {
+            dealer.push(getRandomCard())
+            alert ("Дилер взял карту. Шанс Rare")
+        }
+    }
+}
+function limitMax(){
+    if (getSum(player) > 21 && getSum(dealer) <= 21) {
+        alert (getStatus())
+        alert (getSum(player) + " | У игрока перебор :(")
+            } else if (getSum(dealer) > 21 && getSum(player) <= 21) { 
+        alert (getStatus())
+        alert (getSum(dealer) + " | У дилера перебор!")
+            } else 
+            return{
+            }
+}
+
+var dealer = [getRandomCard()];
+var player = [getRandomCard(), getRandomCard()];
+alert ("Раздача! " + getStatus())
+
+askCardPlayer()
+askCardDealer()
+limitMax()
+
+alert("Сумма дилера: " + getSum(dealer) + " | Сумма ваших карт: " + getSum(player) +" | Выиграл: " + won() + '\n \n======\n \n' + getStatus())
+
+</script>
